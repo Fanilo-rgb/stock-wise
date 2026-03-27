@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    // Structure
+    "rootDir": "./src",
+    "outDir": "./dist",
+
+    // Runtime
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "nodenext",
+
+    // Node.js typings
+    "lib": ["ESNext"],
+    "types": ["node"],
+
+    // Imports modernes
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+
+    // Dev / DX
+    "sourceMap": true,
+    "declaration": true,
+    "declarationMap": true,
+
+    // Sécurité du typage
+    "strict": true,
+    "skipLibCheck": true,
+
+    // JSX (inutile sur un backend, tu peux le retirer)
+    // "jsx": "react-jsx",
+
+    // ⚠️ Désactive celle-ci, elle empêche dotenv/config
+    // "noUncheckedSideEffectImports": true
+  },
+  "exclude": ["node_modules"],
+  "include": [
+    "src",
+    "node_modules/@types/axios/index.d.ts"
+  ]
+}
