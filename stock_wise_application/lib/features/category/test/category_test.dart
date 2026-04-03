@@ -37,7 +37,7 @@ Future<void> testCategories() async {
   debugPrint(' CREATE → ${box.length} catégories ajoutées');
 
   // READ
-  debugPrint('\n📖 READ toutes les catégories :');
+  debugPrint('\n READ toutes les catégories :');
   for (final cat in box.values) {
     debugPrint('   - [${cat.id}] ${cat.name} | icon: ${cat.iconPath}');
   }

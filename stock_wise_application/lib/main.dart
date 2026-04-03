@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:stock_wise_application/app.dart';
+import 'package:stock_wise_application/core/security/encryption_service.dart';
 import 'package:stock_wise_application/features/category/data/models/category_model.dart';
 import 'package:stock_wise_application/features/category/test/category_test.dart';
 import 'package:stock_wise_application/features/consumption/data/models/consumption_log_model.dart';
@@ -27,15 +28,25 @@ void main() async {
   Hive.registerAdapter(ProductModelAdapter());
   Hive.registerAdapter(ShoppingItemModelAdapter());
 
-  // open all boxes
+  // get the cipher once
 
-  await Hive.openBox<CategoryModel>('categories');
-  await Hive.openBox<LocationModel>('locations');
-  await Hive.openBox<HouseholdModel>('household');
-  await Hive.openBox<HouseholdMemberModel>('household_members');
-  await Hive.openBox<ProductModel>('products');
-  await Hive.openBox<ShoppingItemModel>('shopping');
-  await Hive.openBox<ConsumptionLogModel>('consumption');
+  final cipher = await EncryptionService.getHiveCipher();
+
+  // then open all boxes
+
+  await Hive.openBox<CategoryModel>('categories', encryptionCipher: cipher);
+  await Hive.openBox<LocationModel>('locations', encryptionCipher: cipher);
+  await Hive.openBox<HouseholdModel>('household', encryptionCipher: cipher);
+  await Hive.openBox<HouseholdMemberModel>(
+    'household_members',
+    encryptionCipher: cipher,
+  );
+  await Hive.openBox<ProductModel>('products', encryptionCipher: cipher);
+  await Hive.openBox<ShoppingItemModel>('shopping', encryptionCipher: cipher);
+  await Hive.openBox<ConsumptionLogModel>(
+    'consumption',
+    encryptionCipher: cipher,
+  );
 
   // hive database testing
   await testCategories();
