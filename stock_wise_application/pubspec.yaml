@@ -39,6 +39,7 @@ dependencies:
   go_router: ^17.2.0
   hive: ^2.2.3
   iconsax_flutter: ^1.0.1
+  flutter_svg: ^2.2.4
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +71,7 @@ flutter:
   #   - images/a_dot_ham.jpeg
 
   assets:
+    - assets/icons/
     - assets/fonts/
 
   fonts:
