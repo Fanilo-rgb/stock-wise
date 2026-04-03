@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'core/theme/app_theme.dart';
 import 'core/theme/app_colors.dart';
 import 'core/theme/app_text_styles.dart';
+import 'package:iconsax_flutter/iconsax_flutter.dart';
 
 void main() {
   runApp(const MyApp());
@@ -40,6 +41,7 @@ class ThemeTestScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Icon(Iconsax.home_2_copy),
             // ━━━ FONTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             const Text('— TYPOGRAPHIES —', style: AppTextStyles.labelSmall),
             const SizedBox(height: 12),
