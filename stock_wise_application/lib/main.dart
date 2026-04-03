@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'core/theme/app_theme.dart';
+import 'core/theme/app_colors.dart';
+import 'core/theme/app_text_styles.dart';
 
 void main() {
   runApp(const MyApp());
@@ -7,115 +10,135 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        // This is the theme of your application.
-        //
-        // TRY THIS: Try running your application with "flutter run". You'll see
-        // the application has a purple toolbar. Then, without quitting the app,
-        // try changing the seedColor in the colorScheme below to Colors.green
-        // and then invoke "hot reload" (save your changes or press the "hot
-        // reload" button in a Flutter-supported IDE, or press "r" if you used
-        // the command line to start the app).
-        //
-        // Notice that the counter didn't reset back to zero; the application
-        // state is not lost during the reload. To reset the state, use hot
-        // restart instead.
-        //
-        // This works for code too, not just values: Most code changes can be
-        // tested with just a hot reload.
-        colorScheme: .fromSeed(seedColor: Colors.deepPurple),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'StockWise',
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.light,
+      home: const ThemeTestScreen(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  // This widget is the home page of your application. It is stateful, meaning
-  // that it has a State object (defined below) that contains fields that affect
-  // how it looks.
-
-  // This class is the configuration for the state. It holds the values (in this
-  // case the title) provided by the parent (in this case the App widget) and
-  // used by the build method of the State. Fields in a Widget subclass are
-  // always marked "final".
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+class ThemeTestScreen extends StatelessWidget {
+  const ThemeTestScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: AppColors.primary,
+        title: Text(
+          'StockWise',
+          style: AppTextStyles.h3.copyWith(color: AppColors.white),
+        ),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(24),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          //
-          // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
-          // action in the IDE, or press "p" in the console), to see the
-          // wireframe for each widget.
-          mainAxisAlignment: .center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('You have pushed the button this many times:'),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+            // ━━━ FONTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            const Text('— TYPOGRAPHIES —', style: AppTextStyles.labelSmall),
+            const SizedBox(height: 12),
+            const Text('H1 - Lexend Bold 32', style: AppTextStyles.h1),
+            const Text('H2 - Lexend Bold 24', style: AppTextStyles.h2),
+            const Text('H3 - Lexend SemiBold 20', style: AppTextStyles.h3),
+            const Text('H4 - Lexend SemiBold 18', style: AppTextStyles.h4),
+            const Text(
+              'Body Large - Regular 16',
+              style: AppTextStyles.bodyLarge,
             ),
+            const Text('Body - Regular 14', style: AppTextStyles.body),
+            const Text(
+              'Body Small - Regular 12',
+              style: AppTextStyles.bodySmall,
+            ),
+            const Text(
+              'Label Large - SemiBold 16',
+              style: AppTextStyles.labelLarge,
+            ),
+            const Text('Label - Medium 14', style: AppTextStyles.label),
+            const Text('Caption - Light 11', style: AppTextStyles.caption),
+
+            const SizedBox(height: 32),
+
+            // ━━━ COULEURS PRINCIPALES ━━━━━━━━━━━━━━━━━
+            const Text(
+              '— COULEURS PRINCIPALES —',
+              style: AppTextStyles.labelSmall,
+            ),
+            const SizedBox(height: 12),
+            _ColorRow('Primary', AppColors.primary),
+            _ColorRow('Success', AppColors.success),
+            _ColorRow('Warning', AppColors.warning),
+            _ColorRow('Danger', AppColors.danger),
+
+            const SizedBox(height: 32),
+
+            // ━━━ SHADES PRIMARY ━━━━━━━━━━━━━━━━━━━━━━━
+            const Text('— SHADES PRIMARY —', style: AppTextStyles.labelSmall),
+            const SizedBox(height: 12),
+            _ColorRow('Primary 50', AppColors.primary50, textDark: true),
+            _ColorRow('Primary 100', AppColors.primary100, textDark: true),
+            _ColorRow('Primary 200', AppColors.primary200, textDark: true),
+            _ColorRow('Primary 300', AppColors.primary300, textDark: true),
+            _ColorRow('Primary 400', AppColors.primary400, textDark: true),
+            _ColorRow('Primary 500', AppColors.primary500),
+            _ColorRow('Primary 600', AppColors.primary600),
+            _ColorRow('Primary 700', AppColors.primary700),
+            _ColorRow('Primary 800', AppColors.primary800),
+            _ColorRow('Primary 900', AppColors.primary900),
+            _ColorRow('Primary 950', AppColors.primary950),
+
+            const SizedBox(height: 32),
+
+            // ━━━ GREYS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+            const Text('— GREYS —', style: AppTextStyles.labelSmall),
+            const SizedBox(height: 12),
+            _ColorRow('Grey 50', AppColors.grey50, textDark: true),
+            _ColorRow('Grey 100', AppColors.grey100, textDark: true),
+            _ColorRow('Grey 200', AppColors.grey200, textDark: true),
+            _ColorRow('Grey 300', AppColors.grey300, textDark: true),
+            _ColorRow('Grey 400', AppColors.grey400, textDark: true),
+            _ColorRow('Grey 500', AppColors.grey500),
+            _ColorRow('Grey 600', AppColors.grey600),
+            _ColorRow('Grey 700', AppColors.grey700),
+            _ColorRow('Grey 800', AppColors.grey800),
+            _ColorRow('Grey 900', AppColors.grey900),
+            _ColorRow('Grey 950', AppColors.grey950),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+    );
+  }
+}
+
+class _ColorRow extends StatelessWidget {
+  final String label;
+  final Color color;
+  final bool textDark;
+
+  const _ColorRow(this.label, this.color, {this.textDark = false});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 6),
+      height: 44,
+      decoration: BoxDecoration(
+        color: color,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      padding: const EdgeInsets.symmetric(horizontal: 16),
+      alignment: Alignment.centerLeft,
+      child: Text(
+        label,
+        style: AppTextStyles.label.copyWith(
+          color: textDark ? AppColors.textDark : AppColors.white,
+        ),
       ),
     );
   }
