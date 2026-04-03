@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:stock_wise_application/features/category/data/models/category_model.dart';
+import 'package:stock_wise_application/features/category/data/repositories/category_repository_implementation.dart';
 
 Future<void> testCategories() async {
-  final box = Hive.box<CategoryModel>('categories');
-  await box.clear();
+  final repository = CategoryRepositoryImplementation(
+    Hive.box<CategoryModel>('categories'),
+  );
+
+  await repository.clearAll();
 
   debugPrint('\n========== CATEGORIES ==========');
 
@@ -32,23 +36,32 @@ Future<void> testCategories() async {
     ),
   ];
   for (final cat in cats) {
-    await box.put(cat.id, cat);
+    await repository.saveCategory(cat);
   }
-  debugPrint(' CREATE → ${box.length} catégories ajoutées');
+  debugPrint(
+    ' CREATE → ${repository.getAllCategories().length} catégories ajoutées',
+  );
 
   // READ
   debugPrint('\n READ toutes les catégories :');
-  for (final cat in box.values) {
+  for (final cat in repository.getAllCategories()) {
     debugPrint('   - [${cat.id}] ${cat.name} | icon: ${cat.iconPath}');
   }
 
   // UPDATE
-  final cat1 = box.get('cat1')!;
-  cat1.name = 'Alimentation';
-  await cat1.save();
-  debugPrint('\n  UPDATE → cat1 renommée en "${box.get('cat1')!.name}"');
+  final cat1 = repository.getCategoryById("cat1");
+
+  if (cat1 != null) {
+    cat1.name = 'Alimentation';
+    await cat1.save();
+    debugPrint(
+      '\n  UPDATE → cat1 renommée en "${repository.getCategoryById("cat1")!.name}"',
+    );
+  }
 
   // DELETE
-  await box.delete('cat4');
-  debugPrint('  DELETE → cat4 supprimée, reste ${box.length} catégories');
+  await repository.deleteCategory("cat4");
+  debugPrint(
+    '  DELETE → cat4 supprimée, reste ${repository.getAllCategories().length} catégories',
+  );
 }
