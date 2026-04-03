@@ -1,6 +1,6 @@
 import 'package:stock_wise_application/core/result/result.dart';
 import 'package:stock_wise_application/features/product/data/models/product_model.dart';
-import 'package:stock_wise_application/features/product/domain/repositories/product_repository.dart';
+import 'package:stock_wise_application/features/product/data/repositories/product_repository.dart';
 
 class ProductUseCases {
   final ProductRepository _repository;
@@ -24,6 +24,10 @@ class ProductUseCases {
         .toList();
   }
 
+  List<ProductModel> getProductsByCategoryId(String categoryId) {
+    return products.where((p) => p.categoryId == categoryId).toList();
+  }
+
   Future<void> save(ProductModel product) async {
     await _repository.saveProduct(product);
   }
@@ -41,4 +45,6 @@ class ProductUseCases {
   Future<void> delete(String id) async {
     await _repository.deleteProduct(id);
   }
+
+  Future<void> reset() async => await _repository.clearAll();
 }

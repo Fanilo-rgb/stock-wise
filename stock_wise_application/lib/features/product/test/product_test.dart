@@ -8,9 +8,9 @@ import 'package:stock_wise_application/features/product/domain/product_use_cases
 Future<void> testProducts() async {
   final repository = ProductRepositoryImpl(Hive.box<ProductModel>('products'));
 
-  await repository.clearAll();
-
   final productUseCases = ProductUseCases(repository);
+
+  await productUseCases.reset();
 
   debugPrint('\n========== PRODUCTS ==========');
 

@@ -1,6 +1,6 @@
 import 'package:hive/hive.dart';
 import 'package:stock_wise_application/features/product/data/models/product_model.dart';
-import 'package:stock_wise_application/features/product/domain/repositories/product_repository.dart';
+import 'package:stock_wise_application/features/product/data/repositories/product_repository.dart';
 
 class ProductRepositoryImpl implements ProductRepository {
   final Box<ProductModel> _box;
