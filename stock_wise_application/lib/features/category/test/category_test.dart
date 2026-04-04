@@ -2,13 +2,20 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:stock_wise_application/features/category/data/models/category_model.dart';
 import 'package:stock_wise_application/features/category/data/repositories/category_repository_implementation.dart';
+import 'package:stock_wise_application/features/category/useCases/get_categories.dart';
+import 'package:stock_wise_application/features/category/useCases/reset_category.dart';
+import 'package:stock_wise_application/features/category/useCases/save_category.dart';
 
 Future<void> testCategories() async {
   final repository = CategoryRepositoryImplementation(
     Hive.box<CategoryModel>('categories'),
   );
 
-  await repository.clearAll();
+  final resetCategory = ResetCategory(repository);
+  final saveCategory = SaveCategory(repository);
+  final getCategories = GetCategories(repository);
+
+  await resetCategory.call();
 
   debugPrint('\n========== CATEGORIES ==========');
 
@@ -36,15 +43,15 @@ Future<void> testCategories() async {
     ),
   ];
   for (final cat in cats) {
-    await repository.saveCategory(cat);
+    await saveCategory.call(cat);
   }
   debugPrint(
-    ' CREATE → ${repository.getAllCategories().length} catégories ajoutées',
+    ' CREATE → ${getCategories.call().length} catégories ajoutées',
   );
 
   // READ
   debugPrint('\n READ toutes les catégories :');
-  for (final cat in repository.getAllCategories()) {
+  for (final cat in getCategories.call()) {
     debugPrint('   - [${cat.id}] ${cat.name} | icon: ${cat.iconPath}');
   }
 

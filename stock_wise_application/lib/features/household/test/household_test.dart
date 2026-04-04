@@ -2,10 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
 import 'package:stock_wise_application/features/household/data/models/household_member_model.dart';
 import 'package:stock_wise_application/features/household/data/models/household_model.dart';
+import 'package:stock_wise_application/features/household/data/repositories/household_repository_implementation.dart';
+import 'package:stock_wise_application/features/household/useCases/delete_household.dart';
+import 'package:stock_wise_application/features/household/useCases/get_households.dart';
+import 'package:stock_wise_application/features/household/useCases/reset_household.dart';
+import 'package:stock_wise_application/features/household/useCases/save_household.dart';
 
 Future<void> testHousehold() async {
-  final box = Hive.box<HouseholdModel>('household');
-  await box.clear();
+  final repository = HouseholdRepositoryImplementation(
+    Hive.box<HouseholdModel>('household'),
+  );
+
+  final resetHousehold = ResetHousehold(repository);
+  final saveHousehold = SaveHousehold(repository);
+  final getHouseholds = GetHouseholds(repository);
+  final deleteHousehold = DeleteHousehold(repository);
+
+  await resetHousehold.call();
 
   debugPrint('\n========== HOUSEHOLD ==========');
 
@@ -18,11 +31,11 @@ Future<void> testHousehold() async {
       HouseholdMemberModel(id: 'mem3', name: 'Fils', role: 'member'),
     ],
   );
-  await box.put(household.id, household);
+  await saveHousehold.call(household);
   debugPrint(' CREATE → foyer "${household.name}" créé');
 
   // READ
-  final h = box.get('house1')!;
+  final h = getHouseholds.call().first;
   debugPrint('\n READ foyer :');
   debugPrint('   Nom : ${h.name}');
   debugPrint('   Membres (${h.members.length}) :');
@@ -36,7 +49,17 @@ Future<void> testHousehold() async {
   );
   await h.save();
   debugPrint(
-    '\n  UPDATE → ${box.get('house1')!.members.length} membres maintenant',
+    '\n UPDATE → ${getHouseholds.call().first.members.length} membres maintenant',
+  );
+
+  // DELETE
+  await deleteHousehold.call('house1');
+  debugPrint(' DELETE → ${getHouseholds.call().length} foyers restants');
+
+  // RESET
+  await resetHousehold.call();
+  debugPrint(
+    ' RESET → ${getHouseholds.call().length} foyers après réinitialisation',
   );
 }
 

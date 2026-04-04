@@ -5,6 +5,7 @@ import 'package:stock_wise_application/core/security/encryption_service.dart';
 import 'package:stock_wise_application/features/category/data/models/category_model.dart';
 import 'package:stock_wise_application/features/category/test/category_test.dart';
 import 'package:stock_wise_application/features/consumption/data/models/consumption_log_model.dart';
+import 'package:stock_wise_application/features/consumption/test/consumption_test.dart';
 import 'package:stock_wise_application/features/household/data/models/household_member_model.dart';
 import 'package:stock_wise_application/features/household/data/models/household_model.dart';
 import 'package:stock_wise_application/features/household/test/household_test.dart';
@@ -13,6 +14,7 @@ import 'package:stock_wise_application/features/location/test/location_test.dart
 import 'package:stock_wise_application/features/product/data/models/product_model.dart';
 import 'package:stock_wise_application/features/product/test/product_test.dart';
 import 'package:stock_wise_application/features/shopping/data/models/shopping_item_model.dart';
+import 'package:stock_wise_application/features/shopping/test/shopping_test.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -50,9 +52,11 @@ void main() async {
 
   // hive database testing
   await testCategories();
+  await testConsumption();
+  await testHousehold();
   await testLocations();
   await testProducts();
-  await testHousehold();
+  await testShopping();
 
   runApp(const App());
 }
