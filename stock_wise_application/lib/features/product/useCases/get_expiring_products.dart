@@ -7,11 +7,9 @@ class GetExpiringProducts {
   GetExpiringProducts(this._repository);
 
   List<ProductModel> call({int withinDays = 30}) {
-    final deadline = DateTime.now().add(Duration(days: withinDays));
-
-    return _repository
-        .getAllProducts()
-        .where((p) => p.expiryDate != null && p.expiryDate!.isBefore(deadline))
-        .toList();
+    return _repository.getAllProducts().where((p) {
+      final days = p.daysUntilExpiry;
+      return days != null && days >= 0 && days <= withinDays;
+    }).toList();
   }
 }

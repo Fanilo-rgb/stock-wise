@@ -7,11 +7,6 @@ class GetExpiredProducts {
   GetExpiredProducts(this._repository);
 
   List<ProductModel> call() {
-    return _repository
-        .getAllProducts()
-        .where(
-          (p) => p.expiryDate != null && p.expiryDate!.isBefore(DateTime.now()),
-        )
-        .toList();
+    return _repository.getAllProducts().where((p) => p.isExpired).toList();
   }
 }

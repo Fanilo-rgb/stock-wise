@@ -36,4 +36,26 @@ class ProductModel extends HiveObject {
     this.iconPath,
     this.barcode,
   });
+
+  bool get isExpired {
+    final date = expiryDate;
+    if (date == null) return false;
+
+    return date.isBefore(DateTime.now());
+  }
+
+  int? get daysUntilExpiry {
+    final date = expiryDate;
+    if (date == null) return null;
+
+    return date.difference(DateTime.now()).inDays;
+  }
+
+  String get expiryStatus {
+    final days = daysUntilExpiry;
+    if (days == null) return "No expiry date";
+    if (days < 0) return "Expired ${days.abs()}d ago";
+    if (days == 0) return "Expires today";
+    return "Expires in $days d";
+  }
 }
