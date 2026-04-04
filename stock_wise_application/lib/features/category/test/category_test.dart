@@ -3,6 +3,7 @@ import 'package:hive/hive.dart';
 import 'package:stock_wise_application/features/category/data/models/category_model.dart';
 import 'package:stock_wise_application/features/category/data/repositories/category_repository_implementation.dart';
 import 'package:stock_wise_application/features/category/useCases/get_categories.dart';
+import 'package:stock_wise_application/features/category/useCases/get_category.dart';
 import 'package:stock_wise_application/features/category/useCases/reset_category.dart';
 import 'package:stock_wise_application/features/category/useCases/save_category.dart';
 
@@ -14,6 +15,7 @@ Future<void> testCategories() async {
   final resetCategory = ResetCategory(repository);
   final saveCategory = SaveCategory(repository);
   final getCategories = GetCategories(repository);
+  final getCategory = GetCategory(repository);
 
   await resetCategory.call();
 
@@ -42,12 +44,11 @@ Future<void> testCategories() async {
       iconPath: 'assets/icons/gas-propane.svg',
     ),
   ];
+
   for (final cat in cats) {
     await saveCategory.call(cat);
   }
-  debugPrint(
-    ' CREATE → ${getCategories.call().length} catégories ajoutées',
-  );
+  debugPrint(' CREATE → ${getCategories.call().length} catégories ajoutées');
 
   // READ
   debugPrint('\n READ toutes les catégories :');
@@ -56,7 +57,7 @@ Future<void> testCategories() async {
   }
 
   // UPDATE
-  final cat1 = repository.getCategoryById("cat1");
+  final cat1 = getCategory.call("cat1");
 
   if (cat1 != null) {
     cat1.name = 'Alimentation';
