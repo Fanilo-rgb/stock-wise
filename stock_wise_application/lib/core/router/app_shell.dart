@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
+import 'package:stock_wise_application/core/theme/app_colors.dart';
 
 class AppShell extends StatelessWidget {
   final Widget child;
@@ -78,13 +79,13 @@ class NavigationIcon extends StatelessWidget {
           shape: BoxShape.circle,
           boxShadow: [
             BoxShadow(
-              color: Colors.cyan.withValues(alpha: 0.15),
+              color: AppColors.primary600.withValues(alpha: 0.15),
               blurRadius: 8,
               spreadRadius: 0,
             ),
           ],
         ),
-        child: Icon(selectedIcon, color: Colors.cyan),
+        child: Icon(selectedIcon, color: AppColors.primary600),
       ),
       label: '',
     );

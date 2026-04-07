@@ -44,16 +44,5 @@ void main() async {
     encryptionCipher: cipher,
   );
 
-  // hive database testing
-
-  //await testCategories();
-  //await testConsumption();
-  //await testHousehold();
-  //await testLocations();
-  //await testProducts();
-  //await testShopping();
-
-  //await productDetailsTest();
-
   runApp(const App());
 }
