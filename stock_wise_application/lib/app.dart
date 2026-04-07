@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:stock_wise_application/core/router/go_router.dart';
 import 'package:stock_wise_application/core/theme/app_theme.dart';
-import 'package:stock_wise_application/test/theme_test_screen.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'StockWise',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
-      home: const ThemeTestScreen(),
+      routerConfig: goRouter,
     );
   }
 }

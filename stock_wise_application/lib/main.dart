@@ -8,7 +8,6 @@ import 'package:stock_wise_application/features/household/data/models/household_
 import 'package:stock_wise_application/features/household/data/models/household_model.dart';
 import 'package:stock_wise_application/features/location/data/models/location_model.dart';
 import 'package:stock_wise_application/features/product/data/models/product_model.dart';
-import 'package:stock_wise_application/features/product/test/product_details_test.dart';
 import 'package:stock_wise_application/features/shopping/data/models/shopping_item_model.dart';
 
 void main() async {
@@ -54,7 +53,7 @@ void main() async {
   //await testProducts();
   //await testShopping();
 
-  await productDetailsTest();
+  //await productDetailsTest();
 
   runApp(const App());
 }

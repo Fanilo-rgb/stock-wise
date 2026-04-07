@@ -4,6 +4,7 @@ abstract class LocationRepository {
   List<LocationModel> getLocations();
   LocationModel? getLocationById(String id);
   Future<void> saveLocation(LocationModel location);
+  Future<void> updateLocation(String id, LocationModel location);
   Future<void> deleteLocation(String id);
   Future<void> clearAll();
 }

@@ -23,6 +23,11 @@ class LocationRepositoryImpl implements LocationRepository {
   }
 
   @override
+  Future<void> updateLocation(String id, LocationModel location) async {
+    await _box.put(id, location);
+  }
+
+  @override
   Future<void> deleteLocation(String id) async {
     await _box.delete(id);
   }
