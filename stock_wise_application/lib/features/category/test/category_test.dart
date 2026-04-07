@@ -72,4 +72,6 @@ Future<void> testCategories() async {
   debugPrint(
     '  DELETE → cat4 supprimée, reste ${repository.getAllCategories().length} catégories',
   );
+
+  await resetCategory.call();
 }

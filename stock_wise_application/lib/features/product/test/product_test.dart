@@ -8,13 +8,12 @@ import 'package:stock_wise_application/features/product/useCases/get_expiring_pr
 import 'package:stock_wise_application/features/product/useCases/get_low_stock_products.dart';
 import 'package:stock_wise_application/features/product/useCases/get_product_details.dart';
 import 'package:stock_wise_application/features/product/useCases/get_products.dart';
+import 'package:stock_wise_application/features/product/useCases/reset_product.dart';
 import 'package:stock_wise_application/features/product/useCases/save_product.dart';
 import 'package:stock_wise_application/features/product/useCases/update_product_quantity.dart';
 
 Future<void> testProducts() async {
   final repository = ProductRepositoryImpl(Hive.box<ProductModel>('products'));
-
-  await repository.clearAll();
 
   final saveProduct = SaveProduct(repository);
   final getProducts = GetProducts(repository);
@@ -23,6 +22,9 @@ Future<void> testProducts() async {
   final getProductDetails = GetProductDetails(repository);
   final getExpiring = GetExpiringProducts(repository);
   final deleteProduct = DeleteProduct(repository);
+  final resetProduct = ResetProduct(repository);
+
+  await resetProduct.call();
 
   debugPrint('\n========== PRODUCTS ==========');
 
@@ -111,4 +113,7 @@ Future<void> testProducts() async {
   debugPrint(
     '\n  DELETE → prod3 supprimé, reste ${getProducts.call().length} produits',
   );
+
+  // reset le tout pour le prochain test
+  await resetProduct.call();
 }
