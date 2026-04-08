@@ -85,7 +85,7 @@ class NavigationIcon extends StatelessWidget {
             ),
           ],
         ),
-        child: Icon(selectedIcon, color: AppColors.primary600),
+        child: Icon(selectedIcon, color: AppColors.primary600, size: 28),
       ),
       label: '',
     );

@@ -3,6 +3,9 @@ import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:stock_wise_application/core/theme/app_colors.dart';
 import 'package:stock_wise_application/core/theme/app_text_styles.dart';
+import 'package:stock_wise_application/core/widgets/buttons/app_button.dart';
+import 'package:stock_wise_application/core/widgets/inputs/app_text_field.dart';
+import 'package:stock_wise_application/core/widgets/pills/app_pill.dart';
 
 class ThemeTestScreen extends StatelessWidget {
   const ThemeTestScreen({super.key});
@@ -23,8 +26,92 @@ class ThemeTestScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SvgPicture.asset("assets/icons/banana.svg", width: 64),
-            const Icon(Iconsax.home_2_copy),
+            const Text('— BUTTONS —', style: AppTextStyles.labelSmall),
+            const SizedBox(height: 12),
+            // Leading seulement
+            AppButton(
+              label: 'Ajouter',
+              onPressed: () {},
+              leadingIcon: Icons.add,
+            ),
+
+            const SizedBox(height: 8),
+            // Trailing seulement
+            AppButton(
+              label: 'Suivant',
+              onPressed: () {},
+              trailingIcon: Icons.arrow_forward,
+            ),
+
+            const SizedBox(height: 8),
+            // Les deux
+            AppButton(
+              label: 'Scanner',
+              onPressed: () {},
+              leadingIcon: Icons.qr_code_scanner,
+              trailingIcon: Icons.chevron_right,
+              variant: AppButtonVariant.secondary,
+            ),
+
+            const SizedBox(height: 8),
+            // Tertiary
+            AppButton(
+              label: 'Annuler',
+              onPressed: () {},
+              variant: AppButtonVariant.tertiary,
+            ),
+
+            const SizedBox(height: 8),
+            // Large avec trailing
+            AppButton(
+              label: 'Commencer',
+              onPressed: () {},
+              size: AppButtonSize.large,
+              trailingIcon: Icons.arrow_forward,
+              variant: AppButtonVariant.primary,
+            ),
+
+            const SizedBox(height: 8),
+
+            AppTextField(
+              hint: 'ex: Riz basmati',
+              leadingIcon: Iconsax.add_copy,
+            ),
+
+            const SizedBox(height: 8),
+
+            AppTextField(
+              label: 'Quantite',
+              errorText: 'Ce champ est requis',
+              keyboardType: TextInputType.number,
+            ),
+
+            const SizedBox(height: 8),
+
+            // Pills
+            AppPill(label: 'En stock', variant: AppPillVariant.success),
+
+            const SizedBox(height: 8),
+
+            AppPill(
+              label: 'Stock bas',
+              variant: AppPillVariant.warning,
+              icon: Icons.warning_outlined,
+            ),
+
+            const SizedBox(height: 8),
+
+            AppPill(
+              label: 'Expire',
+              variant: AppPillVariant.danger,
+              icon: Icons.schedule_outlined,
+            ),
+
+            const SizedBox(height: 8),
+
+            AppPill(label: 'Hygiene', variant: AppPillVariant.neutral),
+
+            const SizedBox(height: 8),
             // ━━━ FONTS ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
             const Text('— TYPOGRAPHIES —', style: AppTextStyles.labelSmall),
             const SizedBox(height: 12),
