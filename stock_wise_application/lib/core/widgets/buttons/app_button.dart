@@ -27,7 +27,7 @@ class AppButton extends StatelessWidget {
   });
 
   Color get _backgroundColor => switch (variant) {
-    AppButtonVariant.primary => AppColors.primary,
+    AppButtonVariant.primary => AppColors.primary600,
     AppButtonVariant.secondary => AppColors.primary100,
     AppButtonVariant.tertiary => Colors.transparent,
     AppButtonVariant.danger => AppColors.danger,

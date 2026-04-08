@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:iconsax_flutter/iconsax_flutter.dart';
 import 'package:stock_wise_application/core/theme/app_colors.dart';
 import 'package:stock_wise_application/core/theme/app_text_styles.dart';
+import 'package:stock_wise_application/core/widgets/app%20bar/app_bar.dart';
 import 'package:stock_wise_application/core/widgets/buttons/app_button.dart';
 import 'package:stock_wise_application/core/widgets/inputs/app_text_field.dart';
 import 'package:stock_wise_application/core/widgets/pills/app_pill.dart';
@@ -14,12 +14,10 @@ class ThemeTestScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.primary,
-        title: Text(
-          'StockWise',
-          style: AppTextStyles.h3.copyWith(color: AppColors.white),
-        ),
+      appBar: CustomAppBar(
+        title: "Stock Wise",
+        variant: AppBarVariant.titleWithAction,
+        actionLabel: "Skip",
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(24),
