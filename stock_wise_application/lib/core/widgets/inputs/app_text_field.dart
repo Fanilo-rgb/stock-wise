@@ -10,9 +10,10 @@ class AppTextField extends StatelessWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final IconData? leadingIcon;
-  final Widget? trailingWidget; // pour un bouton "voir mot de passe" par ex.
+  final Widget? trailingWidget;
   final ValueChanged<String>? onChanged;
   final int maxLines;
+  final VoidCallback? onSubmitted;
 
   const AppTextField({
     super.key,
@@ -25,6 +26,7 @@ class AppTextField extends StatelessWidget {
     this.leadingIcon,
     this.trailingWidget,
     this.onChanged,
+    this.onSubmitted,
     this.maxLines = 1,
   });
 
@@ -45,6 +47,7 @@ class AppTextField extends StatelessWidget {
           obscureText: obscureText,
           keyboardType: keyboardType,
           onChanged: onChanged,
+          onSubmitted: (_) => onSubmitted,
           maxLines: maxLines,
           style: AppTextStyles.body,
           decoration: InputDecoration(

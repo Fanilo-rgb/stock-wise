@@ -19,8 +19,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final AppBarVariant variant;
 
   // Variant full
-  final VoidCallback? onSearchTap;
-  final VoidCallback? onGridTap;
   final VoidCallback? onMoreTap;
 
   // Variant titleWithMore
@@ -37,8 +35,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     super.key,
     required this.title,
     required this.variant,
-    this.onSearchTap,
-    this.onGridTap,
     this.onMoreTap,
     this.onMoreTapSimple,
     this.onBackTap,
@@ -78,7 +74,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     );
   }
 
-  // ─── Variant 1 : Back | Title | Search + Grid + More ───────────────────────
   Widget _buildFull() {
     return Row(
       children: [
@@ -91,7 +86,6 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        _iconButton(Iconsax.search_normal_copy, onSearchTap),
         _iconButton(Iconsax.more_copy, onMoreTap),
       ],
     );

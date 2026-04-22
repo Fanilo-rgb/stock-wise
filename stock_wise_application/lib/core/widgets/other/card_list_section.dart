@@ -90,17 +90,12 @@ class _SectionHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        // Pill Leading (Optionnel)
         if (leadingValue != null) ...[_buildPill(), const SizedBox(width: 8)],
 
-        // Section title
         Text(title, style: AppTextStyles.h5),
 
-        // Trailing (Optionnel, juste après le titre)
         if (trailing != null) ...[const SizedBox(width: 8), trailing!],
 
-        // Si le bouton est affiché, on pousse tout à gauche.
-        // Sinon, le Spacer est inutile.
         if (onViewMore != null) ...[
           const Spacer(),
           AppButton(

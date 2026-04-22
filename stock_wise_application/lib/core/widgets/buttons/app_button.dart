@@ -31,7 +31,7 @@ class AppButton extends StatelessWidget {
     AppButtonVariant.secondary => AppColors.primary100,
     AppButtonVariant.tertiary => Colors.transparent,
     AppButtonVariant.danger => AppColors.danger,
-    AppButtonVariant.ghost => Colors.transparent,
+    AppButtonVariant.ghost => Colors.white,
   };
 
   Color get _foregroundColor => switch (variant) {
@@ -39,13 +39,13 @@ class AppButton extends StatelessWidget {
     AppButtonVariant.secondary => AppColors.primary600,
     AppButtonVariant.tertiary => AppColors.primary600,
     AppButtonVariant.danger => AppColors.white,
-    AppButtonVariant.ghost => AppColors.primary,
+    AppButtonVariant.ghost => AppColors.grey500,
   };
 
   BorderSide get _borderSide => switch (variant) {
     AppButtonVariant.ghost => const BorderSide(
-      color: AppColors.primary,
-      width: 1.5,
+      color: AppColors.grey100,
+      width: 1,
     ),
     _ => BorderSide.none,
   };

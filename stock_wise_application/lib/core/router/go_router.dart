@@ -4,6 +4,7 @@ import 'package:stock_wise_application/features/dashboard/presentation/screens/d
 import 'package:stock_wise_application/features/home/presentation/screens/home_screen.dart';
 import 'package:stock_wise_application/features/product/presentation/screens/add_product_screen.dart';
 import 'package:stock_wise_application/features/product/presentation/screens/inventory_screen.dart';
+import 'package:stock_wise_application/features/product/presentation/screens/product_details_screen.dart';
 import 'package:stock_wise_application/features/shopping/presentation/screens/shopping_screen.dart';
 import 'package:stock_wise_application/test/theme_test_screen.dart';
 
@@ -22,6 +23,15 @@ final goRouter = GoRouter(
         GoRoute(
           path: "/inventory",
           builder: (context, state) => const InventoryScreen(),
+          routes: [
+            GoRoute(
+              path: ":id",
+              builder: (context, state) {
+                final productId = state.pathParameters["id"]!;
+                return ProductDetailsScreen(productId: productId);
+              },
+            ),
+          ],
         ),
         GoRoute(
           path: "/new-product",

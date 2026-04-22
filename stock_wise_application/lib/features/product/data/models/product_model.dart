@@ -37,6 +37,8 @@ class ProductModel extends HiveObject {
     this.barcode,
   });
 
+  int get preferedQuantity => 5;
+
   bool get isExpired {
     final date = expiryDate;
     if (date == null) return false;
